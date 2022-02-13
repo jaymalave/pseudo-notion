@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Logout from "../components/auth/Logout";
 import ResponsiveDrawer from "../components/drawer/ResponsiveDrawer";
 
 const Home = (props) => {
@@ -8,7 +7,6 @@ const Home = (props) => {
   return (
     <>
       <ResponsiveDrawer />
-      <Logout />
     </>
   );
 };

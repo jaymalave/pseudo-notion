@@ -20,11 +20,9 @@ const Logout = ({ navigateTo = "/login" }) => {
   };
 
   return (
-    <div>
-      <Button disabled={disabled} onClick={logout}>
-        Logout
-      </Button>
-    </div>
+    <Button disabled={disabled} onClick={logout} color="error" fullWidth={true}>
+      Logout
+    </Button>
   );
 };
 
