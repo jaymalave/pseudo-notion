@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import { newPage, updatePage } from "../utils/validation.js";
 import mongoose from "mongoose";
 
-const newPageController = asyncHandler(async (req, res) => {
+export const newPageController = asyncHandler(async (req, res) => {
   await newPage.validateAsync(req.body);
 
   const page = new Page({
@@ -24,7 +24,7 @@ const newPageController = asyncHandler(async (req, res) => {
   }
 });
 
-const getSpecificPage = asyncHandler(async (req, res) => {
+export const getSpecificPage = asyncHandler(async (req, res) => {
   var pageId = new mongoose.Types.ObjectId(req.params.pageId);
   try {
     const page = await User.aggregate([
@@ -38,7 +38,7 @@ const getSpecificPage = asyncHandler(async (req, res) => {
   }
 });
 
-const getAllPages = asyncHandler(async (req, res) => {
+export const getAllPages = asyncHandler(async (req, res) => {
   try {
     const page = await User.find(
       {
@@ -52,7 +52,7 @@ const getAllPages = asyncHandler(async (req, res) => {
   }
 });
 
-const updatePageController = asyncHandler(async (req, res) => {
+export const updatePageController = asyncHandler(async (req, res) => {
   await updatePage.validateAsync(req.body);
 
   try {
@@ -74,10 +74,3 @@ const updatePageController = asyncHandler(async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-module.exports = {
-  newPageController,
-  getSpecificPage,
-  getAllPages,
-  updatePageController,
-};

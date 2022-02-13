@@ -1,8 +1,4 @@
 import { Router } from "express";
-import Page from "../models/Page.js";
-import User from "../models/User.js";
-import { newPage, updatePage } from "../utils/validation.js";
-import mongoose from "mongoose";
 import {
   newPageController,
   getSpecificPage,

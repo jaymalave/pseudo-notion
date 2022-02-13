@@ -1,13 +1,10 @@
+import "dotenv/config";
 import express from "express";
 import pageRouter from "./routes/page.js";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 import tokenToID from "./middleware/authenticateToken.js";
 import cors from "cors";
 import bodyParser from "body-parser";
-
-// initialise dotenv to use environment variables
-dotenv.config();
 
 // initialise express server
 const server = express();
@@ -28,7 +25,7 @@ server.use(bodyParser.urlencoded({ extended: false }));
 server.use(tokenToID);
 
 // database
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true }); // connect to the database
+mongoose.connect(process.env.NODE_DATABASE_URL, { useNewUrlParser: true }); // connect to the database
 const db = mongoose.connection; // store connection
 db.on("error", (error) => console.error(error)); // error handling
 db.once("open", () => console.log("connected to db")); // log success message on successful connection
