@@ -13,6 +13,9 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
+        user.getIdToken().then((idToken) => {
+          localStorage.setItem("Token", idToken);
+        });
         console.info("User detected.");
       } else {
         console.info("No user detected");

@@ -9,11 +9,13 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SidebarContent from "./SidebarContent";
 import Page from "../page/Page";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { width } = useWindowDimensions();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -48,38 +50,40 @@ function ResponsiveDrawer(props) {
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
       >
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          <SidebarContent />
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          <SidebarContent />
-        </Drawer>
+        {width < 600 ? (
+          <Drawer
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+          >
+            <SidebarContent />
+          </Drawer>
+        ) : (
+          <Drawer
+            variant="permanent"
+            sx={{
+              display: { xs: "none", sm: "block" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+            open
+          >
+            <SidebarContent />
+          </Drawer>
+        )}
       </Box>
       <Box
         component="main"

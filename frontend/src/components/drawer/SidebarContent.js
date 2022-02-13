@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { Toolbar, Divider, ListItemButton, Button } from "@mui/material";
+import { Toolbar, Divider, Button } from "@mui/material";
 import Logout from "../auth/Logout";
 import AddIcon from "@mui/icons-material/Add";
+import { getAllPages } from "../../api/getAllPages";
 
 const SidebarContent = () => {
+  useEffect(() => {
+    async function getData() {
+      const data = await getAllPages();
+      console.log("daf", data);
+    }
+    getData();
+  }, []);
+
   return (
     <div
       style={{
