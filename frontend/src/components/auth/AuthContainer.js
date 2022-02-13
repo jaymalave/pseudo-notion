@@ -14,7 +14,8 @@ const AuthContainer = (props) => {
   const signInWithGoogle = () => {
     setDisabled(true);
     signInWithPopup(auth, Providers.google)
-      .then(() => {
+      .then((response) => {
+        console.log(response.user.getIdTokenResult());
         setDisabled(false);
         console.info("TODO: navigate to authenticated screen");
         navigate("/");
