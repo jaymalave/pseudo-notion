@@ -33,26 +33,16 @@ const PageContent = () => {
     setLoading(true);
     getPageData();
     setLoading(false);
-  }, [location]);
+  }, [location]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleTitleChange = async (e) => {
     setTitle(e.target.value);
-    const updateRes = await updateTitle(
-      location.hash.substring(1),
-      e.target.value,
-      content
-    );
-    console.log(updateRes);
+    await updateTitle(location.hash.substring(1), e.target.value, content);
   };
 
   const handleContentChange = async (e) => {
     setContent(e.target.value);
-    const updateRes = await updateContent(
-      location.hash.substring(1),
-      e.target.value,
-      content
-    );
-    console.log(updateRes);
+    await updateContent(location.hash.substring(1), e.target.value, content);
   };
 
   return (
