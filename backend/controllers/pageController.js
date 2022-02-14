@@ -18,7 +18,7 @@ export const newPageController = asyncHandler(async (req, res) => {
       { uid: req.userId },
       { $push: { pages: page } }
     );
-    res.status(201).json({ message: savedPage });
+    res.status(201).json({ message: page });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

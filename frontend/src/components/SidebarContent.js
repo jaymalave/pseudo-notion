@@ -8,14 +8,15 @@ import AddIcon from "@mui/icons-material/Add";
 import { getAllPages } from "../api/getAllPages";
 import Center from "./utils/Center";
 import { newPage } from "../api/newPage";
+import { useNavigate } from "react-router-dom";
 
 const SidebarContent = () => {
   const [pagesData, setPagesData] = useState();
   const [selectedPageId, setSelectedPageId] = useState();
+  let navigate = useNavigate();
 
   async function getData() {
     const data = await getAllPages();
-    console.log(data);
     setPagesData(data);
   }
 
@@ -24,20 +25,19 @@ const SidebarContent = () => {
   }, []);
 
   const selectPage = (pageId) => {
-    console.log(pageId);
+    navigate(`#${pageId}`);
     setSelectedPageId(pageId);
   };
 
   const onPressAdd = async () => {
     const newPageData = await newPage();
-    console.log(newPageData);
     setPagesData((prev) => [
       ...prev,
       {
-        createdAt: "2022-02-15T05:52:39.535Z",
-        title: "Page" + prev.length,
-        updatedAt: "2022-02-15T05:52:39.535Z",
-        _id: "61f3702a0d43f904cd9c" + Math.random(),
+        createdAt: newPageData.createdAt,
+        title: newPageData.title,
+        updatedAt: newPageData.updatedAt,
+        _id: newPageData._id,
       },
     ]);
   };
