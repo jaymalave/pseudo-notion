@@ -44,6 +44,7 @@ const SidebarContent = () => {
         _id: newPageData._id,
       },
     ]);
+    selectPage(newPageData._id);
   };
 
   return (
