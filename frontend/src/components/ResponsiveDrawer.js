@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,13 +8,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SidebarContent from "./SidebarContent";
-import Page from "../page/Page";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import PageContent from "./PageContent";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { width } = useWindowDimensions();
 
   const handleDrawerToggle = () => {
@@ -94,7 +94,7 @@ function ResponsiveDrawer(props) {
         }}
       >
         <Toolbar />
-        <Page />
+        <PageContent />
       </Box>
     </Box>
   );

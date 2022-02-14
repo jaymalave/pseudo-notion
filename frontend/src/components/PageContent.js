@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Box } from "@mui/material";
 
-const Page = () => {
+const PageContent = () => {
   return (
     <div>
       <TextField
@@ -17,4 +17,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default PageContent;
