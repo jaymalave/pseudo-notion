@@ -12,18 +12,27 @@ import ColorModeContext from "./context/ColorModeContext";
 function App() {
   const [loading, setLoading] = useState(true);
 
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState(
+    localStorage.getItem("themePreference") || "light"
+  );
+
   const colorMode = useMemo(
     () => ({
-      // The dark mode switch would invoke this method
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setMode((prevMode) => {
+          if (prevMode === "dark") {
+            localStorage.setItem("themePreference", "light");
+            return "light";
+          } else {
+            localStorage.setItem("themePreference", "dark");
+            return "dark";
+          }
+        });
       },
     }),
     []
   );
 
-  // Update the theme only if the mode changes
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   useEffect(() => {
