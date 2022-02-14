@@ -3,11 +3,16 @@ import { TextField, Box, CircularProgress, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import Center from "../components/utils/Center";
 import { getPage } from "../api/getPage";
+import { updateTitle, updateContent } from "../api/updatePage";
 
 const PageContent = () => {
   const [pageData, setPageData] = useState();
   const [noneSelected, setNoneSelected] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
   const location = useLocation();
 
   const getPageData = async () => {
@@ -16,6 +21,10 @@ const PageContent = () => {
       setNoneSelected(true);
     } else {
       setPageData(data);
+
+      setTitle(data.title);
+      setContent(data.content);
+
       setNoneSelected(false);
     }
   };
@@ -25,6 +34,26 @@ const PageContent = () => {
     getPageData();
     setLoading(false);
   }, [location]);
+
+  const handleTitleChange = async (e) => {
+    setTitle(e.target.value);
+    const updateRes = await updateTitle(
+      location.hash.substring(1),
+      e.target.value,
+      content
+    );
+    console.log(updateRes);
+  };
+
+  const handleContentChange = async (e) => {
+    setContent(e.target.value);
+    const updateRes = await updateContent(
+      location.hash.substring(1),
+      e.target.value,
+      content
+    );
+    console.log(updateRes);
+  };
 
   return (
     <div>
@@ -38,14 +67,16 @@ const PageContent = () => {
       {pageData && (
         <div>
           <TextField
-            value={pageData.title}
+            value={title}
+            onChange={handleTitleChange}
             variant="standard"
             fullWidth={true}
             inputProps={{ style: { fontSize: 40 } }}
           />
           <Box sx={{ mt: 5 }}>
             <TextField
-              value={pageData.content}
+              value={content}
+              onChange={handleContentChange}
               multiline
               maxRows={Infinity}
               fullWidth={true}
