@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import ResponsiveDrawer from "../components/drawer/ResponsiveDrawer";
+import ResponsiveDrawer from "../components/ResponsiveDrawer";
 
 const Home = (props) => {
   useEffect(() => {}, []); // eslint-disable-line react-hooks/exhaustive-deps

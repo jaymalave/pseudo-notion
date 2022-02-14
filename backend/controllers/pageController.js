@@ -8,8 +8,8 @@ export const newPageController = asyncHandler(async (req, res) => {
   await newPage.validateAsync(req.body);
 
   const page = new Page({
-    title: req.body.title,
-    content: req.body.content,
+    title: req.body.title || "Untitled",
+    content: req.body.content || "",
     createdAt: Date.now(),
   });
 
