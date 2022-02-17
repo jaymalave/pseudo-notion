@@ -7,6 +7,6 @@ export const newPage = Joi.object({
 
 export const updatePage = Joi.object({
   action: Joi.string().required(),
-  title: Joi.string(),
-  content: Joi.string(),
+  title: Joi.string().allow(""),
+  content: Joi.string().allow(""),
 });
