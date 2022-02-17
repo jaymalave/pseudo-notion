@@ -81,11 +81,6 @@ export const deletePageController = asyncHandler(async (req, res) => {
   var pageId = new mongoose.Types.ObjectId(req.params.pageId);
 
   try {
-    if (!page) {
-      return res.status(404).json({
-        error: "No Page found",
-      });
-    }
     //delete functionality
     const page = User.update(
       { uid: req.userId },
