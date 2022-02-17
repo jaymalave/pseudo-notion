@@ -74,3 +74,27 @@ export const updatePageController = asyncHandler(async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+//route for handling delete
+export const deletePageController = asyncHandler(async (req, res) => {
+  const { pageId } = req.body;
+  var pageId = new mongoose.Types.ObjectId(req.params.pageId);
+
+  try {
+    if (!page) {
+      return res.status(404).json({
+        error: "No Page found",
+      });
+    }
+    //delete functionality
+    const page = User.update(
+      { uid: req.userId },
+      { $pull: { pages: { _id: req.params.pageId } } }
+    );
+    return res.status(200).json({
+      message: "Page has been deleted",
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
