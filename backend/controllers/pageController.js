@@ -77,14 +77,13 @@ export const updatePageController = asyncHandler(async (req, res) => {
 
 //route for handling delete
 export const deletePageController = asyncHandler(async (req, res) => {
-  const { pageId } = req.body;
   var pageId = new mongoose.Types.ObjectId(req.params.pageId);
 
   try {
     //delete functionality
     const page = await User.update(
       { uid: req.userId },
-      { $pull: { pages: { _id: req.params.pageId } } }
+      { $pull: { pages: { _id: pageId } } }
     );
     return res.status(200).json({
       message: "Page has been deleted",
