@@ -4,6 +4,7 @@ import {
   getSpecificPage,
   getAllPages,
   updatePageController,
+  deletePageController,
 } from "../controllers/pageController.js";
 
 const router = Router();
@@ -18,5 +19,8 @@ router.get("/get", getAllPages);
 
 // update page
 router.post("/update/:pageId", updatePageController);
+
+//delete page
+router.post("/delete/:pageId", deletePageController);
 
 export default router;
